@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <beans profile="dev">
+        <bean class="com.ccqstark.ioc.DataSource" id="devDs">
+            <property name="url" value="jdbc:mysql://dev"/>
+            <property name="username" value="root"/>
+            <property name="password" value="root"/>
+        </bean>
+    </beans>
+
+    <beans profile="prod">
+        <bean class="com.ccqstark.ioc.DataSource" id="prodDs">
+            <property name="url" value="jdbc:mysql://prod"/>
+            <property name="username" value="crud"/>
+            <property name="password" value="crud"/>
+        </bean>
+    </beans>
+
+</beans>
