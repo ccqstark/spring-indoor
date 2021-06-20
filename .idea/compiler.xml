@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ioc02" />
+        <module name="aware" />
         <module name="ioc01" />
       </profile>
     </annotationProcessing>
