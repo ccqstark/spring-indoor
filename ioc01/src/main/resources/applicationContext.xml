@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+<!--    包扫描的xml配置方式-->
+    <context:component-scan base-package="com.ccqstark.ioc.service" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
+
+
+<!--    构造器注入-->
+    <bean class="com.ccqstark.ioc.model.User" id="user">
+        <constructor-arg name="id" value="1" />
+        <constructor-arg name="username" value="ccqstark"/>
+        <constructor-arg name="address" value="chenghai"/>
+    </bean>
+
+<!--    set方法注入-->
+    <bean class="com.ccqstark.ioc.model.User" id="user2">
+        <property name="id" value="2"/>
+        <property name="username" value="ccq"/>
+        <property name="address" value="gz"/>
+    </bean>
+
+<!--    p名称空间注入-->
+    <bean class="com.ccqstark.ioc.model.User" id="user3" p:username="ccqboy" p:id="3" p:address="gdufs"></bean>
+
+<!--    静态工厂注入-->
+<!--    <bean class="com.ccqstark.ioc.OkHttpStaticFactory" factory-method="getInstance" id="okHttpClient"/>-->
+
+<!--    实例工厂注入-->
+    <bean class="com.ccqstark.ioc.OkHttpFactory" id="okHttpFactory"/>
+    <bean class="sun.net.www.http.HttpClient" factory-bean="okHttpFactory" factory-method="getInstance" id="okHttpClient"/>
+
+<!--    对象注入-->
+    <bean class="com.ccqstark.ioc.model.User" id="user4">
+        <property name="id" value="2"/>
+        <property name="username" value="ccq"/>
+        <property name="address" value="gz"/>
+
+<!--对象输入可以用ref指向一个bean，也可以在里面定义一个bean-->
+<!--        <property name="cat" ref="cat"/>-->
+        <property name="cat">
+            <bean class="com.ccqstark.ioc.model.Cat">
+                <property name="age" value="8"/>
+                <property name="name" value="小白"/>
+            </bean>
+        </property>
+
+<!--        数组属性注入-->
+        <property name="cats">
+            <array>
+<!--                ref引用bean-->
+                <ref bean="cat"/>
+<!--                直接定义一个bean-->
+                <bean class="com.ccqstark.ioc.model.Cat" id="cat2">
+                    <property name="name" value="小黄"/>
+                    <property name="age" value="9"/>
+                </bean>
+            </array>
+        </property>
+
+<!--        list属性注入-->
+        <property name="favorites">
+            <list>
+                <value>足球</value>
+                <value>篮球</value>
+            </list>
+        </property>
+
+<!--        map属性注入-->
+        <property name="details">
+            <map>
+                <entry key="gender" value="男"/>
+                <entry key="age" value="99"/>
+            </map>
+        </property>
+
+<!--        Properties属性注入-->
+        <property name="info">
+            <props>
+                <prop key="phone">12345455</prop>
+            </props>
+        </property>
+
+    </bean>
+
+
+<!--    被ref引用的对象-->
+    <bean class="com.ccqstark.ioc.model.Cat" id="cat">
+        <property name="age" value="3"/>
+        <property name="name" value="小白"/>
+    </bean>
+
+</beans>
