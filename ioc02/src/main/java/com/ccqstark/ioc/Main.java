@@ -2,12 +2,15 @@ package com.ccqstark.ioc;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import sun.jvm.hotspot.HelloWorld;
 
 public class Main {
 
     public static void main(String[] args) {
 
-
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(JavaConfig2.class);
+        DataSource d1 = ctx.getBean("d1", DataSource.class);
+        System.out.println("d1 = " + d1);
 
     }
 
@@ -17,8 +20,9 @@ public class Main {
         ctx.getEnvironment().setActiveProfiles("dev");
         ctx.setConfigLocation("applicationContext.xml");
         ctx.refresh();
-        DataSource ds = ctx.getBean(DataSource.class);
-        System.out.println(ds);
+        DataSource ds1 = ctx.getBean(DataSource.class);
+        DataSource ds2 = ctx.getBean(DataSource.class);
+        System.out.println(ds1==ds2);
     }
 
     // 注解方式实现多环境配置
@@ -27,8 +31,9 @@ public class Main {
         ctx.getEnvironment().setActiveProfiles("prod");
         ctx.register(JavaConfig.class);
         ctx.refresh();
-        DataSource ds = ctx.getBean(DataSource.class);
-        System.out.println(ds);
+        DataSource ds1 = ctx.getBean(DataSource.class);
+        DataSource ds2 = ctx.getBean(DataSource.class);
+        System.out.println(ds1==ds2);
     }
 
 

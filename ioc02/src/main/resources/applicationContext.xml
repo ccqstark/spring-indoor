@@ -3,8 +3,15 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean class="com.ccqstark.ioc.DataSource" name="d1,d2,d3" scope="prototype">
+        <property name="url" value="jdbc:mysql://dev"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+
+<!--    id和name的区别就是：id是一个整体，name可以通过逗号隔开取多个名-->
     <beans profile="dev">
-        <bean class="com.ccqstark.ioc.DataSource" id="devDs">
+        <bean class="com.ccqstark.ioc.DataSource" id="devDs" scope="prototype">
             <property name="url" value="jdbc:mysql://dev"/>
             <property name="username" value="root"/>
             <property name="password" value="root"/>
@@ -12,7 +19,7 @@
     </beans>
 
     <beans profile="prod">
-        <bean class="com.ccqstark.ioc.DataSource" id="prodDs">
+        <bean class="com.ccqstark.ioc.DataSource" id="prodDs" scope="prototype">
             <property name="url" value="jdbc:mysql://prod"/>
             <property name="username" value="crud"/>
             <property name="password" value="crud"/>

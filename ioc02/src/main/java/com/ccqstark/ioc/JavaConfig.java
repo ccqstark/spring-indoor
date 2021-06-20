@@ -1,9 +1,6 @@
 package com.ccqstark.ioc;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Conditional;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.*;
 
 @Configuration
 public class JavaConfig {
@@ -25,6 +22,7 @@ public class JavaConfig {
     // 多环境切换用@Profile配置环境信息
     @Bean
     @Profile("dev")
+    @Scope("prototype")
     DataSource devDs() {
         DataSource ds = new DataSource();
         ds.setUrl("jdbc:mysql://dev");
@@ -35,6 +33,7 @@ public class JavaConfig {
 
     @Bean
     @Profile("prod")
+    @Scope("prototype")
     DataSource prodDs() {
         DataSource ds = new DataSource();
         ds.setUrl("jdbc:mysql://prod");
