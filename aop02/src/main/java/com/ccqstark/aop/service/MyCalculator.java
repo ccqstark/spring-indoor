@@ -1,8 +1,8 @@
-package com.ccqstark.aop;
+package com.ccqstark.aop.service;
 
 public interface MyCalculator {
 
-    int add(int a, int b);
+    Integer add(int a, int b);
 
     void min(int a, int b);
 
