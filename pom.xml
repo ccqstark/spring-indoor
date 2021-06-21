@@ -13,6 +13,7 @@
         <module>ioc02</module>
         <module>aware</module>
         <module>aop01</module>
+        <module>aop02</module>
     </modules>
 
     <properties>

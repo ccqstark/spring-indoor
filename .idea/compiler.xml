@@ -10,6 +10,7 @@
         <module name="aop01" />
         <module name="ioc02" />
         <module name="ioc01" />
+        <module name="aop02" />
       </profile>
     </annotationProcessing>
   </component>
