@@ -2,17 +2,20 @@ package com.ccqstark.jdbc;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class JdbcTest {
 
     JdbcTemplate jdbcTemplate;
+    AccountService accountService;
 
     @Before
     public void before(){
-        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(JavaConfig.class);
+//        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(JavaConfig.class);
+        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
         jdbcTemplate = ctx.getBean(JdbcTemplate.class);
+        accountService = ctx.getBean(AccountService.class);
     }
 
     @Test
@@ -23,5 +26,10 @@ public class JdbcTest {
     }
 
     // CRUD省略
+
+    @Test
+    public void test2() {
+        accountService.updateMoney();
+    }
 
 }
